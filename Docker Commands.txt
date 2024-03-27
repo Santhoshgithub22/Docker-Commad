@@ -1,0 +1,81 @@
+FROM, COPY, WORKDIR, RUN, CMD
+
+FROM python:3.8-alpine
+COPY . /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+CMD python app.py
+
+
+# Creating Docker Image
+docker build -t welcome-app .
+
+# Run That docker image as a container
+Here we should give the host port and container port
+docker run -p 5000:5000 welcome-app
+(here will get one api)
+
+# checking how many containers are running
+docker ps
+
+# Docker stop
+docker stop container-id
+
+# Next session is quite amazing
+going to deploy this image in the docker hub repository, once he deployed, then we can pull this particular image, and run this particular docker image as a container, and we can access it your local machine
+
+for pushing into the docker hub
+
+docker login
+give credentials
+
+docker images
+
+# Now i have to rename this particular docker image
+docker image rm -f welcome-app
+
+#The above command will remove the docker image
+#Once this is removed, just do docker images, we will not able to find the docker image there.
+
+#then important command
+
+docker build -t krishnaik06/welcome-app .
+
+give user name before and app name after, this is super important, automatic the build process will starting again, once the build will happen then we can see the new docker image with username
+
+#Another way to change the docker image name
+docker tag krishnaik06/welcome-app krishnaik06/welcome-app1
+
+these are the two ways, how we rename the docker image from older name to new name.
+
+Always make sure that, if you push the repository to the docker hub, make sure that, put your username on front of it.
+
+#Docker push
+docker push krishnaik06/welcome-app:latest
+
+#here latest is nothing but it is a tag of docker images, when we run docker images we can able to find that tag in images.
+
+Now our docker images was pushed, and the most interesting thing is that we can also download it and use it.
+
+Now in docker hub, we can able to see our docker image in the docker hub, specifically with our username
+
+now lets try to delete a docker image,
+and pull it from docker hub and use it in our local machine
+
+docker pull krishnaik06/welcome-app:latest
+
+# Now our images was pulled, check docker images
+
+# Now just run the pulled docker image,
+
+docker run -p 5000:5000 krishnaik06/welcome-app:latest
+
+# Running the pulled docker image in detach mode as well
+
+docker run -d -p 5000:5000 krishnaik06/welcome-app:latest
+
+it is done.
+
+now in next session, he teached about docker compose.
+
+why docker compose and why is that?
